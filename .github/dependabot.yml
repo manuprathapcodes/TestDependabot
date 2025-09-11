@@ -1,0 +1,31 @@
+version: 2
+updates:
+  # GitHub Actions updates
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "live"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "github-actions"
+
+  # Python dependencies (requirements.txt)
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "live"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "python"
+
+  # Docker base images
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "live"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "docker"

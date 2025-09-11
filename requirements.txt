@@ -1,0 +1,13 @@
+
+# --- Dev / Lint / Formatting ---
+black>=24.4.2
+ruff>=0.6.7
+pre-commit>=3.7.1
+
+
+# --- Static Typing ---
+mypy==1.11.1
+types-requests
+types-redis
+types-PyJWT
+types-pytz
