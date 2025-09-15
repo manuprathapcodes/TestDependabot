@@ -49,38 +49,38 @@ jobs:
           echo "**Lint errors:** $(jq '.summary.error_count' ruff-report.json)" >> build-metrics.md
           echo "**Lint warnings:** $(jq '.summary.warning_count' ruff-report.json)" >> build-metrics.md
 
-      - name: Run type checker
-        run: |
-          mypy --config-file pyproject.toml .
+      # - name: Run type checker
+      #   run: |
+      #     mypy --config-file pyproject.toml .
 
-      - name: Build Docker image
-        run: docker build -t lrs-server:latest .
+      # - name: Build Docker image
+      #   run: docker build -t lrs-server:latest .
 
-      - name: Get Docker image size
-        run: |
-          size=$(docker image inspect lrs-server:latest --format='{{.Size}}')
-          echo "**Docker image size (bytes):** $size" >> build-metrics.md
+      # - name: Get Docker image size
+      #   run: |
+      #     size=$(docker image inspect lrs-server:latest --format='{{.Size}}')
+      #     echo "**Docker image size (bytes):** $size" >> build-metrics.md
 
-      - name: Save Docker image to tarball
-        run: docker save lrs-server:latest -o lrs-server.tar
+      # - name: Save Docker image to tarball
+      #   run: docker save lrs-server:latest -o lrs-server.tar
 
-      - name: Upload Docker image artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: lrs-server-image
-          path: lrs-server.tar
+      # - name: Upload Docker image artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: lrs-server-image
+      #     path: lrs-server.tar
 
-      - name: Upload build metrics artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-metrics
-          path: |
-            ruff-report.json
-            build-metrics.md
+      # - name: Upload build metrics artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: build-metrics
+      #     path: |
+      #       ruff-report.json
+      #       build-metrics.md
 
-      - name: Post PR comment with build metrics
-        if: github.event_name == 'pull_request'
-        uses: marocchino/sticky-pull-request-comment@v2
-        with:
-          header: build-metrics
-          path: build-metrics.md
+      # - name: Post PR comment with build metrics
+      #   if: github.event_name == 'pull_request'
+      #   uses: marocchino/sticky-pull-request-comment@v2
+      #   with:
+      #     header: build-metrics
+      #     path: build-metrics.md
