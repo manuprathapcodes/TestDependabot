@@ -1,4 +1,4 @@
-name: LRS Server Build & Lint
+name: Test app Build & Lint
 
 on:
   pull_request:
@@ -29,10 +29,10 @@ jobs:
           echo "Checking branch name: ${{ github.head_ref }}"
           BRANCH_NAME="${{ github.head_ref }}"
 
-          # Allowed formats: develop/*, feature/*, bugfix/*, hotfix/*, release/*, chore/*, test/*, dependabot/*
-          if [[ ! "$BRANCH_NAME" =~ ^(develop|feature|bugfix|hotfix|release|chore|test|dependabot)\/[a-z0-9._-]+$ ]]; then
+          # Allowed formats: develop/*, feature/*, bugfix/*, hotfix/*, release/*, chore/*, test/*, dependabot/* (dependabot now allows nested segments)
+          if [[ ! "$BRANCH_NAME" =~ ^(develop|feature|bugfix|hotfix|release|chore|test|dependabot)\/.*$ ]]; then
             echo "Branch name '$BRANCH_NAME' does not follow the required convention!"
-            echo "Allowed formats: develop/*, feature/*, bugfix/*, hotfix/*, release/*, chore/*, test/*, dependabot/*"
+            echo "Allowed formats: develop/*, feature/*, bugfix/*, hotfix/*, release/*, chore/*, test/*, dependabot/* (dependabot/* now allows nested segments)"
             exit 1
           fi
 

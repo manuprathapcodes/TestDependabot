@@ -1,2 +1,2 @@
 # TestDependabot
-Test repository to see how Dependabot works.  
+Test repository to see how Dependabot works.
